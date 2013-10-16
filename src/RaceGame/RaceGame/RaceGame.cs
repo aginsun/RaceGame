@@ -18,10 +18,13 @@ namespace RaceGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        TrackHandler trackHandler = new TrackHandler();
 
         public RaceGame()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1000;
+            graphics.PreferredBackBufferHeight = 600;
             Content.RootDirectory = "Content";
         }
 
@@ -33,9 +36,7 @@ namespace RaceGame
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
-            base.Initialize();
+           base.Initialize();
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace RaceGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            trackHandler.InitializeTextures(this.Content);
         }
 
         /// <summary>
@@ -70,7 +71,7 @@ namespace RaceGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
+            
 
             base.Update(gameTime);
         }
@@ -83,7 +84,11 @@ namespace RaceGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            trackHandler.DrawTextures(spriteBatch);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
