@@ -10,14 +10,46 @@ namespace RaceGame
 {
     class TrackHandler
     {
+        static TrackHandler instance = new TrackHandler();
         Texture2D texture;
 
-        private static TrackHandler getInstance()
+        private TrackHandler() { }
+
+        public static TrackHandler getInstance()
         {
-            return new TrackHandler();
+            return instance;
         }
 
-        public TrackHandler(){}
+        public void initializeCars()
+        {
+            //TODO: car 1 init
+            //TODO: car 2 init
+        }
+
+        public void update(GameTime gameTime)
+        {  
+            updateCarPosition(gameTime);
+            checkCollisions(gameTime);
+        }
+
+        public void updateCarPosition(GameTime gameTime/*, Car car //(Maybe?)*/)
+        {
+            //TODO: update logic (example: car.update(Gametime?); )
+        }
+
+        public void checkCollisions(GameTime gameTime)
+        {
+            //TODO: Collision update logic
+        }
+
+        public void addPowerup(/*Powerup power*/)
+        {
+            //power.setPosition(int x, int z); TODO
+        }
+
+        public void addPitstopLayer()
+        {
+        }
 
         public void InitializeTextures(ContentManager Content)
         {

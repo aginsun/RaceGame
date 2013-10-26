@@ -1,21 +1,35 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceGame", "RaceGame\RaceGame\RaceGame.csproj", "{6D697230-6B22-4438-9441-BC7E912A265D}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "RaceGameContent", "RaceGame\RaceGameContent\RaceGameContent.contentproj", "{C41A545A-7833-48A1-91A2-A791CBAD6E7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceGameContent", "RaceGame\RaceGameContent\RaceGameContent.contentproj", "{C41A545A-7833-48A1-91A2-A791CBAD6E7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D697230-6B22-4438-9441-BC7E912A265D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{6D697230-6B22-4438-9441-BC7E912A265D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{6D697230-6B22-4438-9441-BC7E912A265D}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{6D697230-6B22-4438-9441-BC7E912A265D}.Debug|x86.ActiveCfg = Debug|x86
 		{6D697230-6B22-4438-9441-BC7E912A265D}.Debug|x86.Build.0 = Debug|x86
+		{6D697230-6B22-4438-9441-BC7E912A265D}.Release|Any CPU.ActiveCfg = Release|x86
+		{6D697230-6B22-4438-9441-BC7E912A265D}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{6D697230-6B22-4438-9441-BC7E912A265D}.Release|Mixed Platforms.Build.0 = Release|x86
 		{6D697230-6B22-4438-9441-BC7E912A265D}.Release|x86.ActiveCfg = Release|x86
 		{6D697230-6B22-4438-9441-BC7E912A265D}.Release|x86.Build.0 = Release|x86
+		{C41A545A-7833-48A1-91A2-A791CBAD6E7F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{C41A545A-7833-48A1-91A2-A791CBAD6E7F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{C41A545A-7833-48A1-91A2-A791CBAD6E7F}.Debug|x86.ActiveCfg = Debug|x86
+		{C41A545A-7833-48A1-91A2-A791CBAD6E7F}.Release|Any CPU.ActiveCfg = Release|x86
+		{C41A545A-7833-48A1-91A2-A791CBAD6E7F}.Release|Mixed Platforms.ActiveCfg = Release|x86
 		{C41A545A-7833-48A1-91A2-A791CBAD6E7F}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution

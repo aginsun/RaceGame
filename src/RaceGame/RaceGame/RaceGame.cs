@@ -18,7 +18,6 @@ namespace RaceGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        TrackHandler trackHandler = new TrackHandler();
 
         public RaceGame()
         {
@@ -48,7 +47,8 @@ namespace RaceGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            trackHandler.InitializeTextures(this.Content);
+            //TrackHandler.getInstance().addPowerup(); TODO
+            TrackHandler.getInstance().InitializeTextures(this.Content);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace RaceGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            
+            TrackHandler.getInstance().update(gameTime);
 
             base.Update(gameTime);
         }
@@ -86,7 +86,7 @@ namespace RaceGame
 
             spriteBatch.Begin();
 
-            trackHandler.DrawTextures(spriteBatch);
+            TrackHandler.getInstance().DrawTextures(spriteBatch);
 
             spriteBatch.End();
 
