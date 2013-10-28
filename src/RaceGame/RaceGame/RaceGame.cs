@@ -17,7 +17,7 @@ namespace RaceGame
     public class RaceGame : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public static SpriteBatch spriteBatch;
 
         public RaceGame()
         {
@@ -35,6 +35,7 @@ namespace RaceGame
         /// </summary>
         protected override void Initialize()
         {
+           TrackHandler.getInstance().initializeCars();
            base.Initialize();
         }
 
