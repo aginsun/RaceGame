@@ -12,8 +12,9 @@ namespace RaceGame
     {
         static TrackHandler instance = new TrackHandler();
         Texture2D texture;
-        Texture2D car1Texture;
-        Texture2D car2Texture;
+        public Texture2D texture1;
+        public Texture2D car1Texture;
+        public Texture2D car2Texture;
         public Car car1;
         public Car car2;
 
@@ -26,8 +27,6 @@ namespace RaceGame
 
         public void initializeCars()
         {
-            //TODO: car 1 init
-            //TODO: car 2 init
             car1 = new Car();
             car2 = new Car();
         }
@@ -51,7 +50,7 @@ namespace RaceGame
 
         public void updateCarPosition(GameTime gameTime/*, Car car //(Maybe?)*/)
         {
-            car1.Update(gameTime);
+             car1.Update(gameTime);
         }
 
         public void checkCollisions(GameTime gameTime)
@@ -71,16 +70,17 @@ namespace RaceGame
         public void InitializeTextures(ContentManager Content)
         {
             this.texture = Content.Load<Texture2D>("baan");
+            this.texture1 = Content.Load<Texture2D>("baan1");
             this.car1Texture = Content.Load<Texture2D>("bumper");
             this.car2Texture = Content.Load<Texture2D>("bumper");
-            if (car1Texture == null)
-                Console.WriteLine("Debug output");
         }
 
         public void DrawTextures(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(this.texture1, new Vector2(0, 0), Color.White);
             spriteBatch.Draw(this.texture, new Vector2(0, 0), Color.White);
             spriteBatch.Draw(this.car1Texture, new Vector2(car1.PosX, car1.PosY), Color.White);
+            spriteBatch.Draw(this.car2Texture, new Vector2(car2.PosX, car2.PosY), Color.White);
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿/*using System;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace RaceGame.Gamelogic
+namespace RaceGame
 {
     /// <summary>
     /// A bitwise (power of two)  enumeration which holds all the values for
@@ -24,84 +24,40 @@ namespace RaceGame.Gamelogic
                       CheckPoint | FinishLine | FullLap),
     }
 
-    public static class CollisionTester
+    public static class CollisionHandler
     {
-
-        #region Constants
         private const int RECTANGLE_OFFSET = 100; //200;
-        #endregion
 
-        #region Variables
+        private static RenderTarget2D trackRender = new RenderTarget2D(RaceGame.graphics.GraphicsDevice, TrackHandler.getInstance().car1Texture.Width + RECTANGLE_OFFSET, TrackHandler.getInstance().car1Texture.Height + RECTANGLE_OFFSET, false, SurfaceFormat.Color, DepthFormat.Depth24);
+        private static RenderTarget2D trackRenderRotated = new RenderTarget2D(RaceGame.graphics.GraphicsDevice, TrackHandler.getInstance().car1Texture.Width + RECTANGLE_OFFSET, TrackHandler.getInstance().car1Texture.Height + RECTANGLE_OFFSET, false, SurfaceFormat.Color, DepthFormat.Depth24);
 
-        /// <summary>
-        /// The Rendertargets below, make sure we can handle pixeldata for collision detection of
-        /// some kind.
-        /// We render small amounts of a texture, but we do that in memory (thus not on screen) afterwards
-        /// we can generate an entire new texture (from code) which can be displayed using a spritebatch.
-        /// To be extra fast, we do this in GPU time instead of CPU.
-        /// </summary>
-        private static RenderTarget2D trackRender = new RenderTarget2D(RaceGame.Device,
-            RaceCar.Width + RECTANGLE_OFFSET, car.Height + RECTANGLE_OFFSET, false, SurfaceFormat.Color, DepthFormat.Depth24);
-        private static RenderTarget2D trackRenderRotated = new RenderTarget2D(RaceGame.Device,
-            RaceCar.Width + RECTANGLE_OFFSET, RaceCar.Height + RECTANGLE_OFFSET, false, SurfaceFormat.Color, DepthFormat.Depth24);
-
-        #endregion
-
-        #region
-        /// <summary>
-        /// Property for retrieving the TrackRender RenderTarget2D
-        /// </summary>
         private static RenderTarget2D TrackRender
         {
             get { return trackRender; }
         }
 
-        /// <summary>
-        /// Property for retrieving the TrackRenderRotated RenderTarget2D
-        /// </summary>
         internal static RenderTarget2D TrackRenderRotated
         {
             get { return trackRenderRotated; }
         }
-        #endregion
 
-
-        /// <summary>
-        /// Helper method which returns the information on what kind of collision occurred.
-        /// See enum BackGround for more information.
-        /// </summary>
-        /// <param name="moveMent">The movement of our object (e.g. the car)</param>
-        /// <param name="currentPosition">The current position of our object (e.g. the car)</param>
-        /// <returns>A bitwise enumeration with the collision values.</returns>
-        public static Background CollidesWith(int moveMent,
-            Vector2 currentPosition)
+        public static Background CollidesWith(int moveMent, Vector2 currentPosition, Car car)
         {
-            if (RaceCar.CurrentTrack == null)
-                throw new ArgumentNullException("RaceCar.CurrentTrack",
-                    "Backgroundcollision, Track cannot be null");
-            if (currentPosition == null)
-                throw new ArgumentNullException("CurrentPosition: No argument specified",
-                    "Backgroundcollision, currentPosition cannot be empty or null");
+            float theXPosition = (float)(-car.Width / 2 + car.PosX + moveMent * Math.Cos(car.Direction));
+            float theYPosition = (float)(-car.Height / 2 + car.PosY + moveMent * Math.Sin(car.Direction));
 
-            //Calculate the position of the car and create the collision texture. This texture will contain 
-            //all of the pixels that are directly underneath the sprite currently on the track image.
-            float theXPosition = (float)(-RaceCar.Width / 2 + RaceCar.CarPosition.X + moveMent * Math.Cos(RaceCar.CarRotation));
-            float theYPosition = (float)(-RaceCar.Height / 2 + RaceCar.CarPosition.Y + moveMent * Math.Sin(RaceCar.CarRotation));
+            Texture2D collisionCheck = CreateCollisionTexture(theXPosition, theYPosition, car);
 
-            Texture2D collisionCheck = CreateCollisionTexture(theXPosition, theYPosition);
-
-            //Now things get a little more complicated, we need to fill in an array with all of the colors of the pixels in the
-            //area of the (required image from above) collision image.
-
-            int nrOfPixels = RaceCar.Width * RaceCar.Height;
+            int nrOfPixels = car.Width * car.Height;
             Color[] foundColors = new Color[nrOfPixels];
-            collisionCheck.GetData<Color>(0, new Rectangle((int)(collisionCheck.Width / 2 + RaceCar.Width / 2),
-                (int)(collisionCheck.Height / 2 + RaceCar.Height / 2), RaceCar.Width, RaceCar.Height), foundColors, 0,
-                nrOfPixels);
 
+            int x = (int)(47 + car.Width / 2);
+            int y = (int)(65 / 2 + car.Height / 2);
+            int width = car.Width;
+            int height = car.Height;
+            Rectangle rec = new Rectangle(x, y, width, height);
+            TrackHandler.getInstance().car1Texture.GetData<Color>(0, rec, foundColors, 0, nrOfPixels);
 
-            //At least we found a few colors, iterate through them and see if we find a color which would
-            //mean we 'hit' something. Gray is still the road however!
             Background collidedWith = Background.Road;
             foreach (Color foundColor in foundColors)
             {
@@ -135,59 +91,47 @@ namespace RaceGame.Gamelogic
                     collidedWith = Background.Dirt;
                     break;
                 }
-                //Can be extended with other colors.
             }
             return collidedWith;
         }
 
-        /// <summary>
-        /// Helper method which creates a texture to determine whether there has
-        /// occurred a collision or not. The returned texture has color data for
-        /// more accurate values.
-        /// </summary>
-        /// <param name="theXPosition">The x position on screen</param>
-        /// <param name="theYPosition">The y position on screen</param>
-        /// <returns></returns>
-        private static Texture2D CreateCollisionTexture(float theXPosition, float theYPosition)
+        private static Texture2D CreateCollisionTexture(float theXPosition, float theYPosition, Car car)
         {
-            RaceGame.Device.SetRenderTarget(TrackRender);
-            RaceGame.Device.Clear(ClearOptions.Target, Color.Red, 0, 0);
-
+            RaceGame.graphics.GraphicsDevice.SetRenderTarget(TrackRender);
+            RaceGame.graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Red, 0, 0);
+                       
             RaceGame.spriteBatch.Begin();
-            RaceGame.spriteBatch.Draw(Track.theTrack, new Rectangle(0, 0, RaceCar.Width + RECTANGLE_OFFSET, RaceCar.Height + RECTANGLE_OFFSET),
+            RaceGame.spriteBatch.Draw(TrackHandler.getInstance().texture1, new Rectangle(0, 0, car.Width + RECTANGLE_OFFSET, car.Height + RECTANGLE_OFFSET),
                 new Rectangle((int)(theXPosition - 50),
-                (int)(theYPosition - 50), RaceCar.Width + RECTANGLE_OFFSET, RaceCar.Height + RECTANGLE_OFFSET),
+                (int)(theYPosition - 50), car.Width + RECTANGLE_OFFSET, car.Height + RECTANGLE_OFFSET), 
                 Color.White);
             RaceGame.spriteBatch.End();
 
-            RaceGame.Device.SetRenderTarget(null);
+            RaceGame.graphics.GraphicsDevice.SetRenderTarget(null);
 
             Texture2D aPicture = TrackRender;
 
-            RaceGame.Device.SetRenderTarget(TrackRenderRotated);
-            RaceGame.Device.Clear(ClearOptions.Target, Color.Red, 0, 0);
+            RaceGame.graphics.GraphicsDevice.SetRenderTarget(TrackRenderRotated);
+            RaceGame.graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Red, 0, 0);
 
             RaceGame.spriteBatch.Begin();
             RaceGame.spriteBatch.Draw(aPicture, new Rectangle((int)(aPicture.Width / 2), (int)(aPicture.Height / 2),
                 aPicture.Width, aPicture.Height), new Rectangle(0, 0, aPicture.Width, aPicture.Width),
-                Color.White, -RaceCar.carRotation, new Vector2((int)(aPicture.Width / 2), (int)(aPicture.Height / 2)),
+                Color.White, -car.Direction, new Vector2((int)(aPicture.Width / 2), (int)(aPicture.Height / 2)),
                 SpriteEffects.None, 0);
             RaceGame.spriteBatch.End();
 
-            RaceGame.Device.SetRenderTarget(null);
+            RaceGame.graphics.GraphicsDevice.SetRenderTarget(null);
             return TrackRenderRotated;
         }
 
 
-        public static void Render()
+        public static void Render(Car car)
         {
-            Texture2D collisionTexture = CreateCollisionTexture(RaceCar.CarPosition.X, RaceCar.CarPosition.Y);
+            Texture2D collisionTexture = CreateCollisionTexture(car.PosX, car.PosY, car);
             RaceGame.spriteBatch.Begin();
-            RaceGame.spriteBatch.Draw(collisionTexture,
-                new Rectangle((int)RaceCar.CarPosition.X - RaceCar.Width, (int)RaceCar.CarPosition.Y - RaceCar.Height,
-                    collisionTexture.Width / 2, collisionTexture.Height / 2),
-                    Color.White);
+            RaceGame.spriteBatch.Draw(collisionTexture, new Rectangle((int)car.PosX-car.Width, (int) car.PosY-car.Height, collisionTexture.Width/2, collisionTexture.Height/2), Color.White);
             RaceGame.spriteBatch.End();
         }
     }
-}*/
+}

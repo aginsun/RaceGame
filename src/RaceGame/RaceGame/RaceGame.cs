@@ -16,14 +16,14 @@ namespace RaceGame
     /// </summary>
     public class RaceGame : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
+        public static GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
 
         public RaceGame()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 1000;
-            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferWidth = 1914;
+            graphics.PreferredBackBufferHeight = 874;
             Content.RootDirectory = "Content";
         }
 

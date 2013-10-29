@@ -15,19 +15,22 @@ namespace RaceGame
     	public float Acceleration;
     	public double Speed;
        	public float Health;
-		public double Direction;
+		public float Direction;
+        public int Width;
+        public int Height;
 
         public Car()
         {
-		    PosX = 0;
-		    PosY = 0;
+		    PosX = 25;
+		    PosY = 52;
 		    Fuel = 30;
 		    Acceleration = 0;
 		    Speed = 0;
 		    Health = 100;
 		    Direction = 90;
+            Width = 47;
+            Height = 65;
         }
-
         
         public void Update(GameTime gameTime)
         {
@@ -35,7 +38,7 @@ namespace RaceGame
 	        KeyboardState kbstate = Keyboard.GetState();
             if (kbstate.IsKeyDown(Keys.W)) 
 	        {
-                if(collision == collision.road)
+                if(CollisionHandler.CollidesWith((int)Speed, new Vector2(PosX, PosY), this) == Background.Road)
 	            {
                     Speed += 0.05;
                     if(Speed > 300)
@@ -43,40 +46,27 @@ namespace RaceGame
                         Speed=300;
                     }
 	            }
-                else if (collision == collision.grass)
+                else if (CollisionHandler.CollidesWith((int)Speed, new Vector2(PosX, PosY), this) == Background.Grass)
                 {
                     if (Speed > 200)
                     {
                         Speed += -0.025;
                     }
                 }
+                else if (CollisionHandler.CollidesWith((int)Speed, new Vector2(PosX, PosY), this) == Background.Wall)
+	            {
+		            Speed=-1*(Speed/4);
+		            Health += -20;
+	            }
                 else
                 {
                     Speed += 0.025;
                 }
-	        }
-            else if(collision == collision.wall)
-	        {
-		        Speed=-1*(Speed/4);
-		        Health += -20;
-	        }
-		    else if(collision == collision.backcar)
-		    {
-		        Speed+= -40;
-		        Health += 15;
-                if(Speed<0)
-                {
-		            Speed=0;
-                }
             }
-		    else if(collision == collision.frontcar)
-			{
-			    Speed+= 20;
-			    Health+= -10 ;
-			}
+
             else if (kbstate.IsKeyDown(Keys.S))
 	        {
-                if(collision == collision.road)
+                if (CollisionHandler.CollidesWith((int)Speed, new Vector2(PosX, PosY), this) == Background.Road)
 	            {
 	                if(Speed>0)
 	                {	
@@ -86,66 +76,52 @@ namespace RaceGame
 	                {
 		                Speed=-200;
 	                }
+                    else if (CollisionHandler.CollidesWith((int)Speed, new Vector2(PosX, PosY), this) == Background.Grass)
+                    {
+                        if (Speed > -100)
+                        {
+                            Speed += +0.025;
+                        }
+                        else
+                        {
+                            Speed += 0.025;
+                        }
+                    }
+                    else if (CollisionHandler.CollidesWith((int)Speed, new Vector2(PosX, PosY), this) == Background.Wall)
+                    {
+                        Speed = 1 * (Speed / 4);
+                        Health += -20;
+                    }
                     else
 	                {
 		                Speed+=-0.25;
 	                }
                 }
 	        }
-            else if(collision == collision.grass)
-	        {
-		        if(Speed>-100)
-		        {
-			        Speed+= +0.025;
-		        }
-                else
-                {
-	                Speed+=0.025;
-                }
-	        }
-            else if(collision == collision.wall)
-	        {
-		        Speed=1*(Speed/4);
-		        Health+= -20;
-	        }
-		    else if(collision == collision.backcar)
-	        {
-			    Speed+= +40;
-				Health += 15;
-                if(Speed>0)
-		        {
-	                Speed=0;
-			    }
-            }
-			else if(collision == collision.frontcar)
-            {
-	           Speed+= -20;
-		       Health+= -10;
-	        }
 
             if ((Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.A)))
             {
                
-                    Direction-=1/Speed;
+                    Direction -= (float) (1 / Speed);
             
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.A))
             {
                
-                    Direction+=1/Speed;
+                    Direction+=(float) (1/Speed);
             
             }
 
             if ((Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.D)))
             {
 
-                Direction+=1/Speed;
+                Direction += (float)(1 / Speed);
 
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.D))
             {
 
-                Direction-=1/Speed;
+                Direction-= (float) (1 / Speed);
 
             }
          
@@ -247,7 +223,6 @@ namespace RaceGame
                         this.PosY += 0;
                     }
              }
-
         }
     }
 }
