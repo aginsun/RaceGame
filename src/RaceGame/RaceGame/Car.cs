@@ -122,6 +122,32 @@ namespace RaceGame
 	           Speed+= -20;
 		       Health+= -10;
 	        }
+
+            if ((Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.A)))
+            {
+               
+                    Direction-=1/Speed;
+            
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+               
+                    Direction+=1/Speed;
+            
+            }
+
+            if ((Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.D)))
+            {
+
+                Direction+=1/Speed;
+
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+
+                Direction-=1/Speed;
+
+            }
          
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
