@@ -7,8 +7,8 @@ namespace RaceGame
 {
     class Powerup
     {
-        int posx;
-        int posy;
+        public int posx;
+        public int posy;
         public int number;
 
         public Powerup(int number)
@@ -21,7 +21,7 @@ namespace RaceGame
         public void onCollision(Car car)
         {
             car.Fuel += 200;
-            TrackHandler.getInstance().listPowerups.RemoveAt(number);
+            TrackHandler.getInstance().ListPowerups.RemoveAt(number);
         }
 
         public void setPosition(int x, int y)

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RaceGame.Car">
+    <Position X="8" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAABAABAAAAACAAAEABAgAgAAAAEgAEAAAAAAA=</HashCode>
+      <FileName>Car.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RaceGame.CollisionHandler">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QEAAAABAAAAAAAAABAAARAAAAAAAAABAABAAAAAAAAA=</HashCode>
+      <FileName>CollisionHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RaceGame.Powerup">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAACAAAAAADAAAAAACAAAAA=</HashCode>
+      <FileName>Powerup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RaceGame.Program">
+    <Position X="2.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RaceGame.RaceGame">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAEEAAAAAAAwAAAAAAAAAAAAAAAAwIAAAAAAAAAIQ=</HashCode>
+      <FileName>RaceGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RaceGame.TrackHandler">
+    <Position X="5.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAkAAAAECACAEgBgAAAAAAAEAIBCABQAAAAAAABECAg=</HashCode>
+      <FileName>TrackHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="RaceGame.Background">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAgAIIAAAAAAAAAAAAAQAAAAAAAAAZgA=</HashCode>
+      <FileName>CollisionHandler.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

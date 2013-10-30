@@ -26,7 +26,7 @@ namespace RaceGame
 
     public static class CollisionHandler
     {
-        private const int RECTANGLE_OFFSET = 100; //200;
+        private const int RECTANGLE_OFFSET = 200; //200;
 
         private static RenderTarget2D trackRender = new RenderTarget2D(RaceGame.graphics.GraphicsDevice, TrackHandler.getInstance().car1Texture.Width + RECTANGLE_OFFSET, TrackHandler.getInstance().car1Texture.Height + RECTANGLE_OFFSET, false, SurfaceFormat.Color, DepthFormat.Depth24);
         private static RenderTarget2D trackRenderRotated = new RenderTarget2D(RaceGame.graphics.GraphicsDevice, TrackHandler.getInstance().car1Texture.Width + RECTANGLE_OFFSET, TrackHandler.getInstance().car1Texture.Height + RECTANGLE_OFFSET, false, SurfaceFormat.Color, DepthFormat.Depth24);
@@ -43,16 +43,16 @@ namespace RaceGame
 
         public static Background CollidesWith(int moveMent, Vector2 currentPosition, Car car)
         {
-            float theXPosition = (float)(-car.Width / 2 + car.PosX + moveMent * Math.Cos(car.Direction));
-            float theYPosition = (float)(-car.Height / 2 + car.PosY + moveMent * Math.Sin(car.Direction));
+            float theXPosition = (float)(-car.Width / 2 + car.CarPosition.X + moveMent * Math.Cos(car.Direction));
+            float theYPosition = (float)(-car.Height / 2 + car.CarPosition.Y + moveMent * Math.Sin(car.Direction));
 
             Texture2D collisionCheck = CreateCollisionTexture(theXPosition, theYPosition, car);
 
             int nrOfPixels = car.Width * car.Height;
             Color[] foundColors = new Color[nrOfPixels];
 
-            int x = (int)(47 + car.Width / 2);
-            int y = (int)(65 / 2 + car.Height / 2);
+            int x = (int)(collisionCheck.Width / 2 + car.Width / 2);
+            int y = (int)(collisionCheck.Height / 2 + car.Height / 2);
             int width = car.Width;
             int height = car.Height;
             Rectangle rec = new Rectangle(x, y, width, height);
@@ -128,9 +128,9 @@ namespace RaceGame
 
         public static void Render(Car car)
         {
-            Texture2D collisionTexture = CreateCollisionTexture(car.PosX, car.PosY, car);
+            Texture2D collisionTexture = CreateCollisionTexture(car.CarPosition.X, car.CarPosition.Y, car);
             RaceGame.spriteBatch.Begin();
-            RaceGame.spriteBatch.Draw(collisionTexture, new Rectangle((int)car.PosX-car.Width, (int) car.PosY-car.Height, collisionTexture.Width/2, collisionTexture.Height/2), Color.White);
+            RaceGame.spriteBatch.Draw(collisionTexture, new Rectangle((int)car.CarPosition.X - car.Width, (int)car.CarPosition.Y - car.Height, collisionTexture.Width / 2, collisionTexture.Height / 2), Color.White);
             RaceGame.spriteBatch.End();
         }
     }
