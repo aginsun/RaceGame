@@ -69,8 +69,7 @@ namespace RaceGame
 
         public void InitializeTextures(ContentManager Content)
         {
-            this.texture = Content.Load<Texture2D>("baan");
-            this.texture1 = Content.Load<Texture2D>("baan1");
+            this.texture1 = Content.Load<Texture2D>("baanv6");
             this.car1Texture = Content.Load<Texture2D>("bumper");
             this.car2Texture = Content.Load<Texture2D>("bumper");
         }
@@ -78,7 +77,6 @@ namespace RaceGame
         public void DrawTextures(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.texture1, new Vector2(0, 0), Color.White);
-            spriteBatch.Draw(this.texture, new Vector2(0, 0), Color.White);
             spriteBatch.Draw(this.car1Texture, new Vector2(car1.PosX, car1.PosY), Color.White);
             spriteBatch.Draw(this.car2Texture, new Vector2(car2.PosX, car2.PosY), Color.White);
         }

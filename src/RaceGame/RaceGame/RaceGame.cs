@@ -23,8 +23,8 @@ namespace RaceGame
         public RaceGame()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 1914;
-            graphics.PreferredBackBufferHeight = 874;
+            graphics.PreferredBackBufferWidth = 1200;
+            graphics.PreferredBackBufferHeight = 700;
             Content.RootDirectory = "Content";
         }
 
@@ -56,12 +56,21 @@ namespace RaceGame
 
         private void DrawText()
         {
-            spriteBatch.DrawString(font, "Remaining energy: " + TrackHandler.getInstance().car1.Fuel, new Vector2(1200, 800), Color.Blue);
-            spriteBatch.DrawString(font, "Completed laps: ", new Vector2(1200, 815), Color.Blue);
-            spriteBatch.DrawString(font, "Current speed: " + TrackHandler.getInstance().car1.Speed, new Vector2(1200, 830), Color.Blue);
-            spriteBatch.DrawString(font, "Projection: ", new Vector2(1200, 845), Color.Blue);
-            spriteBatch.DrawString(font, "Pitstops made: ", new Vector2(1200, 860), Color.Blue);
-            spriteBatch.DrawString(font, "Health: " + TrackHandler.getInstance().car1.Health, new Vector2(800, 860), Color.Blue);
+            spriteBatch.DrawString(font, "Player 1", new Vector2(400, 250), Color.Blue);
+            spriteBatch.DrawString(font, "Health: " + TrackHandler.getInstance().car1.Health, new Vector2(400, 270), Color.Blue);
+            spriteBatch.DrawString(font, "Remaining energy: " + TrackHandler.getInstance().car1.Fuel, new Vector2(400, 290), Color.Blue);
+            spriteBatch.DrawString(font, "Completed laps: ", new Vector2(400, 310), Color.Blue);
+            spriteBatch.DrawString(font, "Current speed: " + TrackHandler.getInstance().car1.Speed, new Vector2(400, 330), Color.Blue);
+            spriteBatch.DrawString(font, "Projection: ", new Vector2(400, 350), Color.Blue);
+            spriteBatch.DrawString(font, "Pitstops made: ", new Vector2(400, 370), Color.Blue);
+
+            spriteBatch.DrawString(font, "Player 2", new Vector2(650, 250), Color.Blue);
+            spriteBatch.DrawString(font, "Health: " + TrackHandler.getInstance().car2.Health, new Vector2(650, 270), Color.Blue);
+            spriteBatch.DrawString(font, "Remaining energy: " + TrackHandler.getInstance().car2.Fuel, new Vector2(650, 290), Color.Blue);
+            spriteBatch.DrawString(font, "Completed laps: ", new Vector2(650, 310), Color.Blue);
+            spriteBatch.DrawString(font, "Current speed: " + TrackHandler.getInstance().car2.Speed, new Vector2(650, 330), Color.Blue);
+            spriteBatch.DrawString(font, "Projection: ", new Vector2(650, 350), Color.Blue);
+            spriteBatch.DrawString(font, "Pitstops made: ", new Vector2(650, 370), Color.Blue);
         }
 
         /// <summary>
