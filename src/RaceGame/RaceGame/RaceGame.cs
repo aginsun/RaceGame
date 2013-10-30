@@ -18,6 +18,7 @@ namespace RaceGame
     {
         public static GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
+        SpriteFont font;
 
         public RaceGame()
         {
@@ -47,9 +48,20 @@ namespace RaceGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            font = Content.Load<SpriteFont>("myFont");
 
             //TrackHandler.getInstance().addPowerup(); TODO
             TrackHandler.getInstance().InitializeTextures(this.Content);
+        }
+
+        private void DrawText()
+        {
+            spriteBatch.DrawString(font, "Remaining energy: " + TrackHandler.getInstance().car1.Fuel, new Vector2(1200, 800), Color.Blue);
+            spriteBatch.DrawString(font, "Completed laps: ", new Vector2(1200, 815), Color.Blue);
+            spriteBatch.DrawString(font, "Current speed: " + TrackHandler.getInstance().car1.Speed, new Vector2(1200, 830), Color.Blue);
+            spriteBatch.DrawString(font, "Projection: ", new Vector2(1200, 845), Color.Blue);
+            spriteBatch.DrawString(font, "Pitstops made: ", new Vector2(1200, 860), Color.Blue);
+            spriteBatch.DrawString(font, "Health: " + TrackHandler.getInstance().car1.Health, new Vector2(800, 860), Color.Blue);
         }
 
         /// <summary>
@@ -88,6 +100,8 @@ namespace RaceGame
             spriteBatch.Begin();
 
             TrackHandler.getInstance().DrawTextures(spriteBatch);
+
+            DrawText();
 
             spriteBatch.End();
 

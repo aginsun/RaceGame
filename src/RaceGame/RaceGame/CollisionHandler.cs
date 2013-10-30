@@ -56,7 +56,7 @@ namespace RaceGame
             int width = car.Width;
             int height = car.Height;
             Rectangle rec = new Rectangle(x, y, width, height);
-            TrackHandler.getInstance().car1Texture.GetData<Color>(0, rec, foundColors, 0, nrOfPixels);
+            collisionCheck.GetData<Color>(0, rec, foundColors, 0, nrOfPixels);
 
             Background collidedWith = Background.Road;
             foreach (Color foundColor in foundColors)
