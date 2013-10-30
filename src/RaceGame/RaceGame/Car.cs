@@ -34,7 +34,10 @@ namespace RaceGame
 
         public void Update(GameTime gameTime)
         {
-            Fuel = Fuel - (0.05 * Speed);
+            Fuel = Fuel - (0.05 * Speed) * (0.05 * Speed);
+           
+            if(Fuel!=0)
+            {
             KeyboardState kbstate = Keyboard.GetState();
             if (kbstate.IsKeyDown(Keys.W))
             {
@@ -98,30 +101,19 @@ namespace RaceGame
                     }
                 }
             }
-
-            if ((Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.A)))
-            {
-
-                Direction -= (float)(1 / Speed);
-
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-
-                Direction += (float)(1 / Speed);
-
             }
 
-            if ((Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.D)))
+            if ( Speed!=0 && Keyboard.GetState().IsKeyDown(Keys.A))
             {
 
-                Direction += (float)(1 / Speed);
+                Direction -= (float)(50 / Speed);
 
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.D))
+           
+            if (Speed != 0 && Keyboard.GetState().IsKeyDown(Keys.D))
             {
 
-                Direction -= (float)(1 / Speed);
+                Direction += (float)(50 / Speed);
 
             }
 
