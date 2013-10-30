@@ -131,63 +131,63 @@ namespace RaceGame
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
 
-                if (Direction >= 1 && Direction <= 44)
+                if (Direction >= 271 && Direction <= 314)
                 {
                     this.PosX -= (int)(Speed * 0.7);
                     this.PosY += (int)(Speed * 0.3);
                 }
-                else if (Direction >= 45 && Direction <= 89)
+                else if (Direction >= 315 && Direction <= 359)
                 {
                     this.PosX -= (int)(Speed * 0.3);
                     this.PosY += (int)(Speed * 0.7);
                 }
-                else if (Direction == 0)
+                else if (Direction == 270)
                 {
                     this.PosX -= (int)(Speed);
 
                 }
-                else if (Direction == 90)
+                else if (Direction == 0)
                 {
 
                     this.PosY += (int)(Speed);
                 }
-                else if (Direction == 180)
+                else if (Direction == 90)
                 {
                     this.PosX += (int)(Speed);
 
                 }
-                else if (Direction == 270)
+                else if (Direction == 180)
                 {
 
                     this.PosY -= (int)(Speed);
                 }
-                else if (Direction >= 91 && Direction <= 134)
+                else if (Direction >= 1 && Direction <= 44)
                 {
                     this.PosX += (int)(Speed * 0.3);
                     this.PosY += (int)(Speed * 0.7);
 
                 }
-                else if (Direction >= 135 && Direction <= 179)
+                else if (Direction >= 45 && Direction <= 89)
                 {
                     this.PosX += (int)(Speed * 0.7);
                     this.PosY += (int)(Speed * 0.3);
                 }
-                else if (Direction >= 181 && Direction <= 224)
+                else if (Direction >= 91 && Direction <= 134)
                 {
                     this.PosX += (int)(Speed * 0.7);
                     this.PosY -= (int)(Speed * 0.3);
                 }
-                else if (Direction >= 225 && Direction <= 269)
+                else if (Direction >= 135 && Direction <= 179)
                 {
                     this.PosX += (int)(Speed * 0.3);
                     this.PosY -= (int)(Speed * 0.7);
                 }
-                else if (Direction >= 271 && Direction <= 314)
+                else if (Direction >= 181 && Direction <= 224)
                 {
                     this.PosX -= (int)(Speed * 0.3);
                     this.PosY += (int)(Speed * 0.7);
                 }
-                else if (Direction >= 315 && Direction <= 359)
+                else if (Direction >= 225 && Direction <= 269)
                 {
                     this.PosX -= (int)(Speed * 0.7);
                     this.PosY += (int)(Speed * 0.3);
@@ -196,63 +196,63 @@ namespace RaceGame
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                if (Direction >= 1 && Direction <= 44)
+                if (Direction >= 271 && Direction <= 314)
                 {
                     this.PosX += (int)(Speed * 0.7);
                     this.PosY -= (int)(Speed * 0.3);
                 }
-                else if (Direction >= 45 && Direction <= 89)
+                else if (Direction >= 315 && Direction <= 359)
                 {
                     this.PosX += (int)(Speed * 0.3);
                     this.PosY -= (int)(Speed * 0.7);
                 }
-                else if (Direction == 0)
+                else if (Direction == 270)
                 {
                     this.PosX += (int)(Speed);
 
                 }
-                else if (Direction == 90)
+                else if (Direction == 0)
                 {
 
                     this.PosY -= (int)(Speed);
                 }
-                else if (Direction == 180)
+                else if (Direction == 90)
                 {
                     this.PosX -= (int)(Speed);
 
                 }
-                else if (Direction == 270)
+                else if (Direction == 180)
                 {
 
                     this.PosY += (int)(Speed);
                 }
-                else if (Direction >= 91 && Direction <= 134)
+                else if (Direction >= 1 && Direction <= 44)
                 {
                     this.PosX -= (int)(Speed * 0.3);
                     this.PosY -= (int)(Speed * 0.7);
 
                 }
-                else if (Direction >= 135 && Direction <= 179)
+                else if (Direction >= 45 && Direction <= 89)
                 {
                     this.PosX -= (int)(Speed * 0.7);
                     this.PosY -= (int)(Speed * 0.3);
                 }
-                else if (Direction >= 181 && Direction <= 224)
+                else if (Direction >= 91 && Direction <= 134)
                 {
                     this.PosX -= (int)(Speed * 0.7);
                     this.PosY += (int)(Speed * 0.3);
                 }
-                else if (Direction >= 225 && Direction <= 269)
+                else if (Direction >= 135 && Direction <= 179)
                 {
                     this.PosX -= (int)(Speed * 0.3);
                     this.PosY += (int)(Speed * 0.7);
                 }
-                else if (Direction >= 271 && Direction <= 314)
+                else if (Direction >= 181 && Direction <= 224)
                 {
                     this.PosX += (int)(Speed * 0.3);
                     this.PosY -= (int)(Speed * 0.7);
                 }
-                else if (Direction >= 315 && Direction <= 359)
+                else if (Direction >= 225 && Direction <= 269)
                 {
                     this.PosX += (int)(Speed * 0.7);
                     this.PosY -= (int)(Speed * 0.3);
