@@ -45,10 +45,9 @@ namespace RaceGame
         {  
             updateCarPosition(gameTime);
             checkCollisions(gameTime);
-            Console.WriteLine(gameTime.TotalGameTime.Seconds);
         }
 
-        public void updateCarPosition(GameTime gameTime/*, Car car //(Maybe?)*/)
+        public void updateCarPosition(GameTime gameTime)
         {
              car1.Update(gameTime);
         }
@@ -77,8 +76,12 @@ namespace RaceGame
         public void DrawTextures(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.texture1, new Vector2(0, 0), Color.White);
-            spriteBatch.Draw(this.car1Texture, new Vector2(car1.PosX, car1.PosY), Color.White);
-            spriteBatch.Draw(this.car2Texture, new Vector2(car2.PosX, car2.PosY), Color.White);
+            spriteBatch.Draw(this.car1Texture, new Vector2(car1.PosX, car1.PosY), null, Color.White, convertToPi(car1.Direction), new Vector2(car1Texture.Bounds.Center.X, car1Texture.Bounds.Center.Y), 0.5f, SpriteEffects.None, 0f);
+        }
+
+        private float convertToPi(float direction)
+        {
+            return (direction * (3.14159265359f / 180));
         }
     }
 }
