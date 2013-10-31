@@ -38,7 +38,8 @@ namespace RaceGame
         {
             if (Fuel > 0)
             {
-                Fuel -= 0.0005;
+                if (Speed > 0)
+                    Fuel -= 0.005;
                 KeyboardState state = Keyboard.GetState();
                 float carMove = (float)gameTime.ElapsedGameTime.TotalSeconds;
                 Speed += Acceleration * carMove;
@@ -80,10 +81,12 @@ namespace RaceGame
 
                 if (state.IsKeyDown(Keys.S) && (collidesWith != Background.Wall))
                     CarPosition = Vector2.Subtract(CarPosition, new Vector2((float)(carMove * 100.0f * Math.Cos(Direction)), (float)(carMove * 100.0f * Math.Sin(Direction))));
-               
+
                 if (Speed < 0)
                     Speed = 0;
             }
+            else
+                Speed = 0;
         }
 
         public void UpdateCar2(GameTime gameTime) //Sneaky code

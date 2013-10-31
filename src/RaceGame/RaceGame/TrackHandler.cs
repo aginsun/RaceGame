@@ -14,6 +14,7 @@ namespace RaceGame
         static TrackHandler instance = new TrackHandler();
 
         //textures
+        public Texture2D texture;
         public Texture2D texture1;
         public Texture2D car1Texture;
         public Texture2D car2Texture;
@@ -116,6 +117,7 @@ namespace RaceGame
         //inits alle textures die op de baan moeten komen te liggen
         public void InitializeTextures(ContentManager Content)
         {
+            this.texture = Content.Load<Texture2D>("overlay1");
             this.texture1 = Content.Load<Texture2D>("baanv6");
             this.car1Texture = Content.Load<Texture2D>("bumper");
             this.car2Texture = Content.Load<Texture2D>("bumper");
@@ -126,6 +128,7 @@ namespace RaceGame
         public void DrawTextures(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.texture1, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(this.texture, new Vector2(0, 0), Color.White);
             spriteBatch.Draw(this.car1Texture, car1.CarPosition, null, Color.White, car1.Direction, new Vector2(car1Texture.Bounds.Center.X, car1Texture.Bounds.Center.Y), 1.0f, SpriteEffects.None, 0f);
             spriteBatch.Draw(this.car2Texture, car2.CarPosition, null, Color.White, car2.Direction, new Vector2(car2Texture.Bounds.Center.X, car2Texture.Bounds.Center.Y), 1.0f, SpriteEffects.None, 0f);
             foreach (Powerup p in ListPowerups)
