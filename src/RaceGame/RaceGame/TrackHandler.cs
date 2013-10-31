@@ -127,11 +127,13 @@ namespace RaceGame
             {
                 car1.hasCheckPoint = false;
                 car1.amountLaps++;
+                car1.lapsleft -= 1;
             }
             if (car2Rec.Intersects(Finish) && car2.hasCheckPoint)
             {
                 car2.hasCheckPoint = false;
                 car2.amountLaps++;
+                car2.lapsleft -= 1;
             }
         }
 

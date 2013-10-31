@@ -19,6 +19,7 @@ namespace RaceGame
         public int Height;
         public bool hasCheckPoint;
         public int amountLaps;
+        public int lapsleft;
 
         public Car()
         {
@@ -32,6 +33,7 @@ namespace RaceGame
             CarPosition = new Vector2(910, 630);
             hasCheckPoint = false;
             amountLaps = 0;
+            lapsleft = 5;
         }
 
         public void Update(GameTime gameTime)
@@ -46,6 +48,7 @@ namespace RaceGame
                 Vector2 currentDirection = new Vector2((float)(Speed * carMove * Math.Cos(Direction)), (float)(Speed * carMove * Math.Sin(Direction)));
 
                 Background collidesWith = CollisionHandler.CollidesWith((int)carMove * 200, CarPosition, this);
+                
                 if ((state.IsKeyDown(Keys.A) && Speed!=0))
                     Direction -= (float)(1 * 3.0f * gameTime.ElapsedGameTime.TotalSeconds);
                 else if ((state.IsKeyDown(Keys.D) && Speed !=0))
