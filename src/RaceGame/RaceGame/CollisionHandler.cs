@@ -26,7 +26,7 @@ namespace RaceGame
 
     public static class CollisionHandler
     {
-        private const int RECTANGLE_OFFSET = 200; //200;
+        private const int RECTANGLE_OFFSET = 80; //200;
 
         private static RenderTarget2D trackRender = new RenderTarget2D(RaceGame.graphics.GraphicsDevice, TrackHandler.getInstance().car1Texture.Width + RECTANGLE_OFFSET, TrackHandler.getInstance().car1Texture.Height + RECTANGLE_OFFSET, false, SurfaceFormat.Color, DepthFormat.Depth24);
         private static RenderTarget2D trackRenderRotated = new RenderTarget2D(RaceGame.graphics.GraphicsDevice, TrackHandler.getInstance().car1Texture.Width + RECTANGLE_OFFSET, TrackHandler.getInstance().car1Texture.Height + RECTANGLE_OFFSET, false, SurfaceFormat.Color, DepthFormat.Depth24);
