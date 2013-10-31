@@ -14,7 +14,7 @@ namespace RaceGame
         public double Fuel;
         public float Acceleration;
         public double Speed;
-        public float Health;
+        public double Health;
         public float Direction;
         public int Width;
         public int Height;
@@ -66,7 +66,10 @@ namespace RaceGame
                     if (collidesWith == Background.Grass)
                     {
                         if (Speed >= 200.0f * 0.3f)
+                        {
                             Acceleration = -200.0f * 0.3f;
+                            Health -= 0.2;
+                        }
                     }
                     else
                     {
@@ -124,7 +127,10 @@ namespace RaceGame
                     if (collidesWith == Background.Grass)
                     {
                         if (Speed >= 200.0f * 0.3f)
+                        {
+                            Health -= 0.2;
                             Acceleration = -200.0f * 0.3f;
+                        }
                     }
                     else
                     {
