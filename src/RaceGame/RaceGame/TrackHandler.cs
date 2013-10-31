@@ -19,6 +19,7 @@ namespace RaceGame
         public Texture2D car1Texture;
         public Texture2D car2Texture;
         public Texture2D powerupTexture;
+        public int pitstopcount = 0;
 
         //de 2 autos
         public Car car1;
@@ -58,8 +59,7 @@ namespace RaceGame
         //initializeert alle powerups voor de baan en hun positie
         public void initializePowerups()
         {
-            addPowerup(new Powerup(0), 5, 10);
-            addPowerup(new Powerup(1), 20, 50);
+            addPowerup(new Powerup(0), 400, 75);
         }
 
 
@@ -83,7 +83,7 @@ namespace RaceGame
         {
             //vierkantjes van de car!
             Rectangle car1Rec = new Rectangle((int)car1.CarPosition.X, (int)car1.CarPosition.Y, car1.Width, car1.Height);
-            Rectangle car2Rec = new Rectangle((int)car2.CarPosition.X, (int)car2.CarPosition.Y, car2.Width, car2.Height);
+            Rectangle car2Rec = new Rectangle((int)car2.CarPosition2.X, (int)car2.CarPosition2.Y, car2.Width, car2.Height);
 
             //doormiddel van te kijken of 2 rectangles met elkaar overlappen kijken we of ie inderdaad overlapt met een van de dingen
             if (car1Rec.Intersects(Checkpoint))
@@ -162,7 +162,7 @@ namespace RaceGame
             spriteBatch.Draw(this.texture1, new Vector2(0, 0), Color.White);
             spriteBatch.Draw(this.texture, new Vector2(0, 0), Color.White);
             spriteBatch.Draw(this.car1Texture, car1.CarPosition, null, Color.White, car1.Direction, new Vector2(car1Texture.Bounds.Center.X, car1Texture.Bounds.Center.Y), 1.0f, SpriteEffects.None, 0f);
-            spriteBatch.Draw(this.car2Texture, car2.CarPosition, null, Color.White, car2.Direction, new Vector2(car2Texture.Bounds.Center.X, car2Texture.Bounds.Center.Y), 1.0f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(this.car2Texture, car2.CarPosition2, null, Color.White, car2.Direction, new Vector2(car2Texture.Bounds.Center.X, car2Texture.Bounds.Center.Y), 1.0f, SpriteEffects.None, 0f);
             foreach (Powerup p in ListPowerups)
             {
                 spriteBatch.Draw(this.powerupTexture, new Vector2(p.posx, p.posy), Color.White);

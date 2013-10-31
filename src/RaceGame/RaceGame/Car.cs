@@ -10,6 +10,7 @@ namespace RaceGame
     public class Car
     {
         public Vector2 CarPosition;
+        public Vector2 CarPosition2;
         public double Fuel;
         public float Acceleration;
         public double Speed;
@@ -20,6 +21,7 @@ namespace RaceGame
         public bool hasCheckPoint;
         public int amountLaps;
         public int lapsleft;
+        public int Pitstopcount;
 
         public Car()
         {
@@ -30,10 +32,12 @@ namespace RaceGame
             Direction = 0;
             Width = 33;
             Height = 24;
-            CarPosition = new Vector2(910, 630);
+            CarPosition = new Vector2(910, 610);
+            CarPosition2 = new Vector2(910, 650);
             hasCheckPoint = false;
             amountLaps = 0;
             lapsleft = 5;
+            Pitstopcount = 0;
         }
 
         public void Update(GameTime gameTime)
@@ -111,7 +115,7 @@ namespace RaceGame
                 if ((state.IsKeyDown(Keys.Up) && (collidesWith != Background.Wall)))
                 {
                     Acceleration = 200.0f;
-                    CarPosition = Vector2.Add(CarPosition, currentDirection);
+                    CarPosition2 = Vector2.Add(CarPosition2, currentDirection);
 
                     if (collidesWith == Background.Wall)
                     {
@@ -134,7 +138,7 @@ namespace RaceGame
 
                 else if ((state.IsKeyUp(Keys.Up)) && (collidesWith != Background.Wall))
                 {
-                    CarPosition = Vector2.Add(CarPosition, currentDirection);
+                    CarPosition2 = Vector2.Add(CarPosition2, currentDirection);
                     if (Speed <= 0.0f)
                         Acceleration = 0.0f;
                     else Speed -= 5.0f;
@@ -142,7 +146,7 @@ namespace RaceGame
 
                 else if (state.IsKeyDown(Keys.Down) && (collidesWith != Background.Wall))
                      {
-                         CarPosition = Vector2.Subtract(CarPosition, new Vector2((float)(carMove * 100.0f * Math.Cos(Direction)), (float)(carMove * 100.0f * Math.Sin(Direction))));
+                         CarPosition2 = Vector2.Subtract(CarPosition2, new Vector2((float)(carMove * 100.0f * Math.Cos(Direction)), (float)(carMove * 100.0f * Math.Sin(Direction))));
                      }
                 if (Speed < 0)
                     Speed = 0;
