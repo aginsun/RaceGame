@@ -91,9 +91,38 @@ namespace RaceGame
             if (car2Rec.Intersects(Checkpoint))
                 car2.hasCheckPoint = true;
             if (car1Rec.Intersects(Pitstop))
-                car1.Fuel += 0.015;
+                {
+                    if (car1.Speed > 0 &&(car1.Fuel<30||car1.Health<100))
+                    {
+                        car1.Speed -= (car1.Speed/5);
+                        if (car1.Speed < 25)
+                        {
+                            car1.Speed = 0;
+                        }
+                    }
+                car1.Fuel += 0.010;
+                if (car1.Health <= 99.9)
+                    {
+                        car1.Health += (float)0.03;
+                    }
+                }
             if (car2Rec.Intersects(Pitstop))
-                car2.Fuel += 0.015;
+                {
+                    if (car2.Speed > 0 && (car1.Fuel < 30 || car1.Health < 100))
+                    {
+                        car2.Speed -= (car1.Speed / 6);
+                        if (car2.Speed < 25)
+                        {
+                            car2.Speed = 0;
+                        }
+                        
+                    }
+                    car2.Fuel += 0.010;
+                    if(car2.Health<=99.9)
+                    {
+                        car2.Health += (float)0.03;
+                    }
+                }
             if (car1Rec.Intersects(Finish) && car1.hasCheckPoint)
             {
                 car1.hasCheckPoint = false;
@@ -118,7 +147,8 @@ namespace RaceGame
         public void InitializeTextures(ContentManager Content)
         {
             this.texture = Content.Load<Texture2D>("overlay1");
-            this.texture1 = Content.Load<Texture2D>("baanv6");
+            
+            this.texture1 = Content.Load<Texture2D>("collision");
             this.car1Texture = Content.Load<Texture2D>("bumper");
             this.car2Texture = Content.Load<Texture2D>("bumper");
             this.powerupTexture = Content.Load<Texture2D>("mushroom");

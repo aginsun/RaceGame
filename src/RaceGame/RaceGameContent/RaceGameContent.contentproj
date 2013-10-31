@@ -99,8 +99,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="overlay1.jpg">
+    <Compile Include="overlay1.png">
       <Name>overlay1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="collision.png">
+      <Name>collision</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

@@ -46,9 +46,9 @@ namespace RaceGame
                 Vector2 currentDirection = new Vector2((float)(Speed * carMove * Math.Cos(Direction)), (float)(Speed * carMove * Math.Sin(Direction)));
 
                 Background collidesWith = CollisionHandler.CollidesWith((int)carMove * 200, CarPosition, this);
-                if ((state.IsKeyDown(Keys.A)))
+                if ((state.IsKeyDown(Keys.A) && Speed!=0))
                     Direction -= (float)(1 * 3.0f * gameTime.ElapsedGameTime.TotalSeconds);
-                else if ((state.IsKeyDown(Keys.D)))
+                else if ((state.IsKeyDown(Keys.D) && Speed !=0))
                     Direction += (float)(1 * 3.0f * gameTime.ElapsedGameTime.TotalSeconds);
 
                 if ((state.IsKeyDown(Keys.W) && (collidesWith != Background.Wall)))
@@ -110,6 +110,10 @@ namespace RaceGame
                     Acceleration = 200.0f;
                     CarPosition = Vector2.Add(CarPosition, currentDirection);
 
+                    if (collidesWith == Background.Wall)
+                    {
+                        Speed -= -1 * (Speed / 4);
+                    }
                     if (collidesWith == Background.Grass)
                     {
                         if (Speed >= 200.0f * 0.3f)
@@ -133,9 +137,10 @@ namespace RaceGame
                     else Speed -= 5.0f;
                 }
 
-                if (state.IsKeyDown(Keys.Down) && (collidesWith != Background.Wall))
-                    CarPosition = Vector2.Subtract(CarPosition, new Vector2((float)(carMove * 100.0f * Math.Cos(Direction)), (float)(carMove * 100.0f * Math.Sin(Direction))));
-
+                else if (state.IsKeyDown(Keys.Down) && (collidesWith != Background.Wall))
+                     {
+                         CarPosition = Vector2.Subtract(CarPosition, new Vector2((float)(carMove * 100.0f * Math.Cos(Direction)), (float)(carMove * 100.0f * Math.Sin(Direction))));
+                     }
                 if (Speed < 0)
                     Speed = 0;
             }

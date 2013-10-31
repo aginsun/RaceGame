@@ -61,12 +61,12 @@ namespace RaceGame
             Background collidedWith = Background.Road;
             foreach (Color foundColor in foundColors)
             {
-                if (foundColor.Equals(Color.Gray))
+                if (foundColor.Equals(Color.Black))
                 {
                     collidedWith = Background.Road;
                     break;
                 }
-                else if (foundColor.Equals(Color.Blue))
+                else if (foundColor.Equals(Color.Red))
                 {
                     collidedWith = Background.Wall;
                     break;
@@ -76,7 +76,7 @@ namespace RaceGame
                     collidedWith = Background.Grass;
                     break;
                 }
-                else if (foundColor.Equals(Color.Red))
+                else if (foundColor.Equals(Color.Blue))
                 {
                     collidedWith = Background.FullLap;
                     break;
@@ -86,7 +86,7 @@ namespace RaceGame
                     collidedWith = Background.CheckPoint;
                     break;
                 }
-                else if (foundColor.Equals(Color.Brown))
+                else if (foundColor.Equals(Color.Orange))
                 {
                     collidedWith = Background.Dirt;
                     break;
