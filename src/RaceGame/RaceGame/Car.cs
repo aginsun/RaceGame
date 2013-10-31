@@ -42,7 +42,7 @@ namespace RaceGame
 
         public void Update(GameTime gameTime)
         {
-            if (Fuel > 0)
+            if (Fuel > 0 && Health > 0)
             {
                 if (Speed > 0)
                     Fuel -= 0.005;
@@ -94,14 +94,17 @@ namespace RaceGame
 
                 if (Speed < 0)
                     Speed = 0;
+
+                if (Health < 0)
+                Health = 0;
             }
             else
                 Speed = 0;
         }
-
+    
         public void UpdateCar2(GameTime gameTime) //Sneaky code
         {
-            if (Fuel > 0)
+            if (Fuel > 0 && Health > 0)
             {
                 Fuel -= 0.0005;
                 KeyboardState state = Keyboard.GetState();
@@ -156,6 +159,9 @@ namespace RaceGame
                      }
                 if (Speed < 0)
                     Speed = 0;
+
+                if (Health < 0)
+                    Health = 0;
             }
         }
         /*public void Update(GameTime gameTime)
