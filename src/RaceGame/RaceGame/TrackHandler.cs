@@ -20,6 +20,7 @@ namespace RaceGame
         public Texture2D car2Texture;
         public Texture2D powerupTexture;
         public int pitstopcount = 0;
+        public bool powerupintersect = false;
 
         //de 2 autos
         public Car car1;
@@ -164,7 +165,10 @@ namespace RaceGame
             spriteBatch.Draw(this.car1Texture, car1.CarPosition, null, Color.White, car1.Direction, new Vector2(car1Texture.Bounds.Center.X, car1Texture.Bounds.Center.Y), 1.0f, SpriteEffects.None, 0f);
             spriteBatch.Draw(this.car2Texture, car2.CarPosition2, null, Color.White, car2.Direction, new Vector2(car2Texture.Bounds.Center.X, car2Texture.Bounds.Center.Y), 1.0f, SpriteEffects.None, 0f);
             foreach (Powerup p in ListPowerups)
+
             {
+                if((car1.amountLaps == 1))
+
                 spriteBatch.Draw(this.powerupTexture, new Vector2(p.posx, p.posy), Color.White);
             }
         }
