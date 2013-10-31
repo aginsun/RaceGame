@@ -33,6 +33,7 @@ namespace RaceGame
         Rectangle Pitstop = new Rectangle(467, 489, (467 - 176), (557 - 489));
         Rectangle Checkpoint = new Rectangle(278, 20, (285 - 278), (115 - 20));
         Rectangle Finish = new Rectangle(928, 583, 5, (676 - 583));
+        Rectangle Powerup = new Rectangle(400, 75, 4, 4);
 
         //Private constructor zodat niemand per ongeluk een 2e instantie van trackhandler kan maken
         private TrackHandler() { }
@@ -167,8 +168,8 @@ namespace RaceGame
             foreach (Powerup p in ListPowerups)
 
             {
-                if((car1.amountLaps == 1))
-
+                if ((car1.amountLaps == 1))
+                    addPowerup(p, 400, 75);
                 spriteBatch.Draw(this.powerupTexture, new Vector2(p.posx, p.posy), Color.White);
             }
         }
