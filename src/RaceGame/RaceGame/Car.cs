@@ -22,6 +22,7 @@ namespace RaceGame
         public int amountLaps;
         public int lapsleft;
         public int Pitstopcount;
+        public bool haspitstop;
 
         public Car()
         {
@@ -38,6 +39,7 @@ namespace RaceGame
             amountLaps = 0;
             lapsleft = 5;
             Pitstopcount = 0;
+            haspitstop = false;
         }
 
         public void Update(GameTime gameTime)

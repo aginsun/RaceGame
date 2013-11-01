@@ -30,10 +30,9 @@ namespace RaceGame
         public List<Powerup> ListPowerups = new List<Powerup>();
 
         //Vierkanten van de pitstop, checkpoint en finish!
-        Rectangle Pitstop = new Rectangle(467, 489, (467 - 176), (557 - 489));
+        Rectangle Pitstop = new Rectangle(520, 480, (467 - 245), (557 - 505));
         Rectangle Checkpoint = new Rectangle(278, 20, (285 - 278), (115 - 20));
         Rectangle Finish = new Rectangle(928, 583, 5, (676 - 583));
-        Rectangle Powerup = new Rectangle(400, 75, 4, 4);
 
         //Private constructor zodat niemand per ongeluk een 2e instantie van trackhandler kan maken
         private TrackHandler() { }
@@ -67,7 +66,7 @@ namespace RaceGame
 
         //een methode die alle verschillende dingen die geupdate moeten worden bij elkaar brengt zodat het in een keer kan aangeroepen worden in de RaceGame class
         public void update(GameTime gameTime)
-        {  
+        {
             updateCarPosition(gameTime);
             checkCollisions(gameTime);
         }
@@ -93,38 +92,52 @@ namespace RaceGame
             if (car2Rec.Intersects(Checkpoint))
                 car2.hasCheckPoint = true;
             if (car1Rec.Intersects(Pitstop))
+            {
+                car1.haspitstop = true;
+
+                if (car1.Speed > 0 && (car1.Fuel < 30 || car1.Health < 100))
                 {
-                    if (car1.Speed > 0 &&(car1.Fuel<30||car1.Health<100))
+                    car1.Speed -= (car1.Speed / 5);
+                    if (car1.Speed < 25)
                     {
-                        car1.Speed -= (car1.Speed/5);
-                        if (car1.Speed < 25)
-                        {
-                            car1.Speed = 0;
-                        }
+                        car1.Speed = 0;
                     }
+                }
                 car1.Fuel += 0.010;
-                if (car1.Health <= 99.9)
-                    {
-                        car1.Health += (float)0.03;
-                    }
-                }
-            if (car2Rec.Intersects(Pitstop))
+                if (car1.Health <= 100)
                 {
-                    if (car2.Speed > 0 && (car1.Fuel < 30 || car1.Health < 100))
-                    {
-                        car2.Speed -= (car1.Speed / 6);
-                        if (car2.Speed < 25)
-                        {
-                            car2.Speed = 0;
-                        }
-                        
-                    }
-                    car2.Fuel += 0.010;
-                    if(car2.Health<=99.9)
-                    {
-                        car2.Health += (float)0.03;
-                    }
+                    car1.Health += (float)0.03;
                 }
+            }
+            if (car1Rec.Intersects(Pitstop) == false && car1.haspitstop)
+            {
+                car1.haspitstop = false;
+                car1.Pitstopcount++;
+            }
+            if (car2Rec.Intersects(Pitstop))
+            {
+                car2.haspitstop = true;
+
+                if (car2.Speed > 0 && (car2.Fuel < 30 || car2.Health < 100))
+                {
+                    car2.Speed -= (car1.Speed / 6);
+                    if (car2.Speed < 25)
+                    {
+                        car2.Speed = 0;
+                    }
+
+                }
+                car2.Fuel += 0.010;
+                if (car2.Health <= 99.9)
+                {
+                    car2.Health += (float)0.03;
+                }
+            }
+            if (car2Rec.Intersects(Pitstop) == false && car2.haspitstop)
+            {
+                car2.haspitstop = false;
+                car2.Pitstopcount++;
+            }
             if (car1Rec.Intersects(Finish) && car1.hasCheckPoint)
             {
                 car1.hasCheckPoint = false;
@@ -142,7 +155,7 @@ namespace RaceGame
         //een methode om powerups toe te voegen op een bepaalde locatie op de baan!
         private void addPowerup(Powerup power, int x, int y)
         {
-            power.setPosition(x, y);
+            power.setPosition(400, 75);
             //Voegt het aan een lijst toe om het later weer van de baan te kunnen verwijderen
             ListPowerups.Insert(power.number, power);
         }
@@ -151,7 +164,7 @@ namespace RaceGame
         public void InitializeTextures(ContentManager Content)
         {
             this.texture = Content.Load<Texture2D>("overlay1");
-            
+
             this.texture1 = Content.Load<Texture2D>("collision");
             this.car1Texture = Content.Load<Texture2D>("bumper");
             this.car2Texture = Content.Load<Texture2D>("bumper");
@@ -166,11 +179,10 @@ namespace RaceGame
             spriteBatch.Draw(this.car1Texture, car1.CarPosition, null, Color.White, car1.Direction, new Vector2(car1Texture.Bounds.Center.X, car1Texture.Bounds.Center.Y), 1.0f, SpriteEffects.None, 0f);
             spriteBatch.Draw(this.car2Texture, car2.CarPosition2, null, Color.White, car2.Direction, new Vector2(car2Texture.Bounds.Center.X, car2Texture.Bounds.Center.Y), 1.0f, SpriteEffects.None, 0f);
             foreach (Powerup p in ListPowerups)
-
             {
                 if ((car1.amountLaps == 1))
-                    addPowerup(p, 400, 75);
-                spriteBatch.Draw(this.powerupTexture, new Vector2(p.posx, p.posy), Color.White);
+
+                    spriteBatch.Draw(this.powerupTexture, new Vector2(p.posx, p.posy), Color.White);
             }
         }
     }
