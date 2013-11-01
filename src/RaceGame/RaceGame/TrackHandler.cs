@@ -16,7 +16,7 @@ namespace RaceGame
         //textures
         public Texture2D texture;
         public Texture2D texture1;
-        public Texture2D car1Texture;
+        public Texture2D carTexture;
         public Texture2D car2Texture;
         public Texture2D powerupTexture;
         public int pitstopcount = 0;
@@ -84,7 +84,7 @@ namespace RaceGame
         {
             //vierkantjes van de car!
             Rectangle car1Rec = new Rectangle((int)car1.CarPosition.X, (int)car1.CarPosition.Y, car1.Width, car1.Height);
-            Rectangle car2Rec = new Rectangle((int)car2.CarPosition2.X, (int)car2.CarPosition2.Y, car2.Width, car2.Height);
+            Rectangle car2Rec = new Rectangle((int)car2.CarPosition.X, (int)car2.CarPosition.Y, car2.Width, car2.Height);
 
             //doormiddel van te kijken of 2 rectangles met elkaar overlappen kijken we of ie inderdaad overlapt met een van de dingen
             if (car1Rec.Intersects(Checkpoint))
@@ -103,34 +103,43 @@ namespace RaceGame
                         car1.Speed = 0;
                     }
                 }
-                car1.Fuel += 0.010;
+                car1.Fuel += 0.05;
                 if (car1.Health <= 100)
                 {
-                    car1.Health += (float)0.03;
+                    car1.Health += (float)0.5;
                 }
             }
+
             if (car1Rec.Intersects(Pitstop) == false && car1.haspitstop)
             {
                 car1.haspitstop = false;
                 car1.Pitstopcount++;
             }
+
+            if (car1Rec.Intersects(Finish) && car1.hasCheckPoint)
+            {
+                car1.hasCheckPoint = false;
+                car1.amountLaps++;
+                car1.lapsleft -= 1;
+            }
+
             if (car2Rec.Intersects(Pitstop))
             {
                 car2.haspitstop = true;
 
                 if (car2.Speed > 0 && (car2.Fuel < 30 || car2.Health < 100))
                 {
-                    car2.Speed -= (car1.Speed / 6);
+                    car2.Speed -= (car2.Speed / 5);
                     if (car2.Speed < 25)
                     {
                         car2.Speed = 0;
                     }
 
                 }
-                car2.Fuel += 0.010;
-                if (car2.Health <= 99.9)
+                car2.Fuel += 0.050;
+                if (car2.Health <= 100)
                 {
-                    car2.Health += (float)0.03;
+                    car2.Health += (float)0.5;
                 }
             }
             if (car2Rec.Intersects(Pitstop) == false && car2.haspitstop)
@@ -138,12 +147,7 @@ namespace RaceGame
                 car2.haspitstop = false;
                 car2.Pitstopcount++;
             }
-            if (car1Rec.Intersects(Finish) && car1.hasCheckPoint)
-            {
-                car1.hasCheckPoint = false;
-                car1.amountLaps++;
-                car1.lapsleft -= 1;
-            }
+
             if (car2Rec.Intersects(Finish) && car2.hasCheckPoint)
             {
                 car2.hasCheckPoint = false;
@@ -165,8 +169,8 @@ namespace RaceGame
         {
             this.texture = Content.Load<Texture2D>("overlay1");
 
-            this.texture1 = Content.Load<Texture2D>("collision");
-            this.car1Texture = Content.Load<Texture2D>("bumper");
+            this.texture1 = Content.Load<Texture2D>("collision23");
+            this.carTexture = Content.Load<Texture2D>("bumper");
             this.car2Texture = Content.Load<Texture2D>("bumper");
             this.powerupTexture = Content.Load<Texture2D>("mushroom");
         }
@@ -176,11 +180,11 @@ namespace RaceGame
         {
             spriteBatch.Draw(this.texture1, new Vector2(0, 0), Color.White);
             spriteBatch.Draw(this.texture, new Vector2(0, 0), Color.White);
-            spriteBatch.Draw(this.car1Texture, car1.CarPosition, null, Color.White, car1.Direction, new Vector2(car1Texture.Bounds.Center.X, car1Texture.Bounds.Center.Y), 1.0f, SpriteEffects.None, 0f);
-            spriteBatch.Draw(this.car2Texture, car2.CarPosition2, null, Color.White, car2.Direction, new Vector2(car2Texture.Bounds.Center.X, car2Texture.Bounds.Center.Y), 1.0f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(this.carTexture, car1.CarPosition, null, Color.White, car1.Direction, new Vector2(carTexture.Bounds.Center.X, carTexture.Bounds.Center.Y), 1.0f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(this.car2Texture, car2.CarPosition, null, Color.White, car2.Direction, new Vector2(car2Texture.Bounds.Center.X, car2Texture.Bounds.Center.Y), 1.0f, SpriteEffects.None, 0f);
             foreach (Powerup p in ListPowerups)
             {
-                if ((car1.amountLaps == 1))
+                if (car1.amountLaps == 5 || car2.amountLaps == 5)
 
                     spriteBatch.Draw(this.powerupTexture, new Vector2(p.posx, p.posy), Color.White);
             }

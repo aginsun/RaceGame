@@ -63,7 +63,7 @@ namespace RaceGame
             spriteBatch.DrawString(font, "Completed laps: " + TrackHandler.getInstance().car1.amountLaps, new Vector2(400, 310), Color.Blue);
             spriteBatch.DrawString(font, "Current speed: " + (int)TrackHandler.getInstance().car1.Speed, new Vector2(400, 330), Color.Blue);
             spriteBatch.DrawString(font, "Projection: " + (int)(TrackHandler.getInstance().car1.Fuel / 5), new Vector2(400, 350), Color.Blue);
-            spriteBatch.DrawString(font, "Pitstop Count: " + (int)(TrackHandler.getInstance().car1.Pitstopcount), new Vector2(400, 370), Color.Blue);
+            spriteBatch.DrawString(font, "Pitstop made: " + (int)(TrackHandler.getInstance().car1.Pitstopcount), new Vector2(400, 370), Color.Blue);
 
             spriteBatch.DrawString(font, "Player 2", new Vector2(650, 250), Color.Blue);
             spriteBatch.DrawString(font, "Health: " + TrackHandler.getInstance().car2.Health, new Vector2(650, 270), Color.Blue);
